@@ -6,74 +6,21 @@ block main
         .row 
             .col-12 
                 +box-head("Danh sách sản phẩm") 
-        .row    
-            .col-xl-3.col-lg-4.col-md-6.col-6.mb-3 
-                .product-item 
-                    .inner-image 
-                        img(src="https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png", alt="")
-                    .inner-content 
-                        h3.inner-title iPhone Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempore adipisci sint tenetur, impedit quas ullam voluptate corrupti officiis molestiae veritatis autem vitae deserunt veniam est, culpa eligendi doloremque iusto dicta?
-                        .inner-new-price 100$
-                        .inner-old-price 120$
-                    .inner-discount 
-                        span -20%
-            .col-xl-3.col-lg-4.col-md-6.col-6.mb-3 
-                .product-item 
-                    .inner-image 
-                        img(src="https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png", alt="")
-                    .inner-content 
-                        h3.inner-title iPhone 
-                        .inner-new-price 100$
-                        .inner-old-price 120$
-                    .inner-discount 
-                        span -20%
-            .col-xl-3.col-lg-4.col-md-6.col-6.mb-3 
-                .product-item 
-                    .inner-image 
-                        img(src="https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png", alt="")
-                    .inner-content 
-                        h3.inner-title iPhone 
-                        .inner-new-price 100$
-                        .inner-old-price 120$
-                    .inner-discount 
-                        span -20%
-            .col-xl-3.col-lg-4.col-md-6.col-6.mb-3 
-                .product-item 
-                    .inner-image 
-                        img(src="https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png", alt="")
-                    .inner-content 
-                        h3.inner-title iPhone 
-                        .inner-new-price 100$
-                        .inner-old-price 120$
-                    .inner-discount 
-                        span -20%
-            .col-xl-3.col-lg-4.col-md-6.col-6.mb-3 
-                .product-item 
-                    .inner-image 
-                        img(src="https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png", alt="")
-                    .inner-content 
-                        h3.inner-title iPhone 
-                        .inner-new-price 100$
-                        .inner-old-price 120$
-                    .inner-discount 
-                        span -20%
-            .col-xl-3.col-lg-4.col-md-6.col-6.mb-3 
-                .product-item 
-                    .inner-image 
-                        img(src="https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png", alt="")
-                    .inner-content 
-                        h3.inner-title iPhone 
-                        .inner-new-price 100$
-                        .inner-old-price 120$
-                    .inner-discount 
-                        span -20%
-            .col-xl-3.col-lg-4.col-md-6.col-6.mb-3 
-                .product-item 
-                    .inner-image 
-                        img(src="https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png", alt="")
-                    .inner-content 
-                        h3.inner-title iPhone 
-                        .inner-new-price 100$
-                        .inner-old-price 120$
-                    .inner-discount 
-                        span -20%
+        .row  
+            if(products.length > 0)
+                each item in products 
+                    .col-xl-3.col-lg-4.col-md-6.col-6.mb-3 
+                        .product-item 
+                            .inner-image 
+                                img(src=item.thumbnail, alt=item.title)
+                            .inner-content 
+                                h3.inner-title #{item.title}
+                                .inner-new-price #{item.price}$
+                                .inner-old-price #{item.newPrice}$
+                            .inner-discount
+                                span -#{item.discountPercentage}%
+            else 
+                .col-12.text-align-center 
+                    | Danh sách sản phẩm tróng!  
+            
+            

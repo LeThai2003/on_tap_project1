@@ -107,6 +107,10 @@ a:hover{
     aspect-ratio: 4/3;
     flex-shrink: 0;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
 }
 
 .product-item .inner-image:hover img{
@@ -118,6 +122,7 @@ a:hover{
     width: 90%;
     object-fit: contain;
     transition: transform 0.2s ease-in;
+    border-radius: 5px;
 }
 
 .product-item .inner-content
@@ -158,8 +163,8 @@ a:hover{
 
 .product-item .inner-discount
 {
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;

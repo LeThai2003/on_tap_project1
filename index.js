@@ -6,11 +6,12 @@ dotenv.config();
 
 const port = process.env.PORT;
 
-
 const routesClient = require("./routes/client/index.route");
 
 app.set("views", "./views");
 app.set("view engine", "pug");
+
+app.use(express.static("public"));
 
 //routes
 routesClient(app);

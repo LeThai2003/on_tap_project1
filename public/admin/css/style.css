@@ -57,4 +57,5 @@ header .inner-logo a:hover{
 .body .main{
     padding: 10px 20px;
     overflow-y: auto;
+    flex: 1;
 }

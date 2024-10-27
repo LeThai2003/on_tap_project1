@@ -3,6 +3,30 @@ extends ../../layouts/default.pug
 block main 
     h2.mb-4 #{pageTitle}
 
+    .card.mb-4
+        .card-header Bộ lọc và Tìm kiếm 
+        .card-body 
+            .row 
+                .col-6 
+                    each item in filterState
+                        button(class=`btn btn-outline-success mr-1 ${item.class}` button-status=item.status) #{item.name}
+
+                .col-6 
+                    form(id="form-search")
+                        .input-group 
+                            input(
+                                type="text"
+                                class="form-control"
+                                name="keyword"
+                                placeholder="Nhập từ khóa"
+                                value=keyword
+                            ) 
+                            .input-group-append 
+                                button(
+                                    type="submit"
+                                    class="btn btn-success"
+                                ) Tìm
+
     table.table.table-hover.table-sm 
         thead 
             tr 

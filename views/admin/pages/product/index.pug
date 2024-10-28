@@ -1,4 +1,6 @@
 extends ../../layouts/default.pug 
+include ../../mixins/filterStatus.pug
+include ../../mixins/search.pug
 
 block main 
     h2.mb-4 #{pageTitle}
@@ -7,25 +9,11 @@ block main
         .card-header Bộ lọc và Tìm kiếm 
         .card-body 
             .row 
-                .col-6 
-                    each item in filterState
-                        button(class=`btn btn-outline-success mr-1 ${item.class}` button-status=item.status) #{item.name}
+                .col-6
+                    +filterStatus(filterState)
 
                 .col-6 
-                    form(id="form-search")
-                        .input-group 
-                            input(
-                                type="text"
-                                class="form-control"
-                                name="keyword"
-                                placeholder="Nhập từ khóa"
-                                value=keyword
-                            ) 
-                            .input-group-append 
-                                button(
-                                    type="submit"
-                                    class="btn btn-success"
-                                ) Tìm
+                    +search(keyword)
 
     table.table.table-hover.table-sm 
         thead 
@@ -56,3 +44,17 @@ block main
                     td 
                         button(class="btn btn-warning btn-sm mr-2") Sửa 
                         button(class="btn btn-danger btn-sm") Xóa 
+
+    
+    nav 
+        ul(class="pagination") 
+            li(class="page-item")
+                button(class="page-link") Trang trước
+            li(class="page-item")
+                button(class="page-link") 1
+            li(class="page-item active")
+                button(class="page-link") 2
+            li(class="page-item")
+                button(class="page-link") 3
+            li(class="page-item")
+                button(class="page-link") Trang sau

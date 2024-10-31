@@ -73,3 +73,31 @@ module.exports.changeStatus = async (req, res) => {
         res.redirect(`/${prefixAdmin}/products`);
     }
 }
+
+// [PATCH] /admin/products/change-multi
+module.exports.changeMulti = async (req, res) => {
+    try {
+        const ids = req.body.ids.split(", ");
+        const type = req.body.type;
+        
+        switch (type) {
+            case "active":
+            case "inactive":
+                await Product.updateMany({
+                    _id: {$in: ids}
+                }, {
+                    status: type
+                })
+                break;
+        
+            default:
+                break;
+        }
+        
+
+        res.redirect(`back`);
+    } catch (error) {
+        console.error(error);
+        res.redirect(`/${prefixAdmin}/products`);
+    }
+}

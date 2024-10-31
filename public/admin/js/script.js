@@ -64,3 +64,24 @@ if(pagination)
     })
 }
 // ---------end pagination--------
+
+// ---------change-status---------
+const buttonsStatus = document.querySelectorAll("[button-change-status]");
+if(buttonsStatus.length > 0)
+{
+    const formChangeStatus = document.querySelector("[form-change-status]");
+    const path = formChangeStatus.getAttribute("path");
+    buttonsStatus.forEach((button) => {
+        button.addEventListener("click", () => {
+            const status = button.getAttribute("data-status");
+            const id = button.getAttribute("data-id");
+
+            const statusChange = status == "active" ? "inactive" : "active";
+
+            const action = `${path}/${statusChange}/${id}?_method=PATCH`;
+            formChangeStatus.action = action;
+            formChangeStatus.submit();
+        })
+    })
+}
+// ---------end change-status-----

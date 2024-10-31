@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const methodOverride = require('method-override')
 const app = express();
 const database = require("./configs/database");
 const system = require("./configs/system");
@@ -8,6 +9,9 @@ dotenv.config();
 const port = process.env.PORT;
 //kết nối database
 database.connect();
+
+// override with POST having ?_method=DELETE
+app.use(methodOverride('_method'))
 
 const routesClient = require("./routes/client/index.route");
 const routesAdmin = require("./routes/admin/index.route");

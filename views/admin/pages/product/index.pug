@@ -1,6 +1,7 @@
 extends ../../layouts/default.pug 
 include ../../mixins/filterStatus.pug
 include ../../mixins/search.pug
+include ../../mixins/pagination.pug
 
 block main 
     h2.mb-4 #{pageTitle}
@@ -37,39 +38,32 @@ block main
                     td #{item.title}
                     td 
                         if(item.status == "active")
-                            a(href="#" class="badge badge-success") Hoạt động  
+                            a(
+                                href="javascript:;" 
+                                class="badge badge-success"
+                                data-status=item.status 
+                                data-id=item.id
+                                button-change-status
+                            ) Hoạt động  
                         else 
-                            a(href="#" class="badge badge-danger") Dừng hoạt động
+                            a(
+                                href="javascript:;" 
+                                class="badge badge-danger"
+                                data-status=item.status 
+                                data-id=item.id
+                                button-change-status
+                            ) Dừng hoạt động
                     td #{item.price} $
                     td 
                         button(class="btn btn-warning btn-sm mr-2") Sửa 
                         button(class="btn btn-danger btn-sm") Xóa 
 
-    
-    nav 
-        ul(class="pagination") 
-            li(
-                class=`page-item`
-                button-pagination=1
-            )
-                button(class="page-link") Trang đầu
-            if(pagination.currentPage > 1)        
-                li(
-                    class=`page-item`
-                    button-pagination=pagination.currentPage-1
-                )
-                    button(class="page-link") Trang trước
-            - for(let i = 1; i <= pagination.totalPage; i++)
-                li(class=`page-item ${pagination.currentPage == i ? 'active' : ''}`)
-                    button(class="page-link" button-pagination=i) #{i}
-            if(pagination.currentPage < pagination.totalPage)   
-                li(
-                    class="page-item"
-                    button-pagination=pagination.currentPage+1
-                )
-                    button(class="page-link") Trang sau
-            li(
-                class=`page-item`
-                button-pagination=pagination.totalPage
-            )
-                button(class="page-link") Trang cuối
+    +pagination(pagination)    
+
+
+    form(
+        action=""
+        method="POST"
+        path=`/${prefixAdmin}/products/change-status`
+        form-change-status
+    ) 

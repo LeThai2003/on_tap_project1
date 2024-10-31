@@ -1,5 +1,6 @@
 const { prefixAdmin } = require("../../configs/system");
 const { filterStatus } = require("../../helpers/filterStatus.helper");
+const { paginationHelper } = require("../../helpers/pagination.helper");
 const Product = require("../../models/product.model");
 
 //[GET] /admin/product
@@ -28,21 +29,9 @@ module.exports.index = async (req, res) => {
     
     
         // pagination
-        const objectPagination = {
-            currentPage: 1,
-            limitItems: 4
-        }
-    
-        if(req.query.page)
-        {
-            objectPagination.currentPage = parseInt(req.query.page);
-        }
-    
         const countProduct = await Product.countDocuments(find);
-    
-        objectPagination.totalPage = Math.ceil(countProduct / objectPagination.limitItems);
-    
-        objectPagination.skip = (objectPagination.currentPage - 1) * objectPagination.limitItems;
+
+        const objectPagination = paginationHelper(req, countProduct);
         // end pagination
     
     
@@ -59,6 +48,26 @@ module.exports.index = async (req, res) => {
             keyword: req.query.keyword,
             pagination: objectPagination
         })
+    } catch (error) {
+        console.error(error);
+        res.redirect(`/${prefixAdmin}/products`);
+    }
+}
+
+
+// [PATCH] /admin/products/change-status/:status/:id
+module.exports.changeStatus = async (req, res) => {
+    try {
+        const status = req.params.status;
+        const id = req.params.id;
+
+        await Product.updateOne({
+            _id: id
+        }, {
+            status: status
+        })
+
+        res.redirect(`back`);
     } catch (error) {
         console.error(error);
         res.redirect(`/${prefixAdmin}/products`);

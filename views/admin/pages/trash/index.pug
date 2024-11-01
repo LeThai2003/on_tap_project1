@@ -30,7 +30,6 @@ block main
                         th STT
                         th Hình ảnh 
                         th Tiêu đề 
-                        th Trạng thái 
                         th Giá 
                         th Hành động 
                 tbody 
@@ -51,31 +50,13 @@ block main
                                     height="auto"
                                 )
                             td #{item.title}
-                            td 
-                                if(item.status == "active")
-                                    a(
-                                        href="javascript:;" 
-                                        class="badge badge-success"
-                                        data-status=item.status 
-                                        data-id=item.id
-                                        button-change-status
-                                    ) Hoạt động  
-                                else 
-                                    a(
-                                        href="javascript:;" 
-                                        class="badge badge-danger"
-                                        data-status=item.status 
-                                        data-id=item.id
-                                        button-change-status
-                                    ) Dừng hoạt động
                             td #{item.price} $
                             td 
-                                button(class="btn btn-warning btn-sm mr-2") Sửa 
                                 button(
-                                    class="btn btn-danger btn-sm"
-                                    button-delete 
+                                    class="btn btn-warning btn-sm mr-2"
+                                    button-back 
                                     data-id=item.id
-                                ) Xóa 
+                                ) Ngừng xóa
 
             +pagination(pagination)    
 
@@ -90,6 +71,6 @@ block main
     form(
         action=""
         method="POST"
-        path=`/${prefixAdmin}/products/delete`
-        form-delete-product
+        path=`/${prefixAdmin}/trash-products/back`
+        form-back-product
     ) 

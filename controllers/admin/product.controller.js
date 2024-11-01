@@ -101,3 +101,41 @@ module.exports.changeMulti = async (req, res) => {
         res.redirect(`/${prefixAdmin}/products`);
     }
 }
+
+// [PATCH] /admin/products/change-status/:status/:id
+module.exports.changeStatus = async (req, res) => {
+    try {
+        const status = req.params.status;
+        const id = req.params.id;
+
+        await Product.updateOne({
+            _id: id
+        }, {
+            status: status
+        })
+
+        res.redirect(`back`);
+    } catch (error) {
+        console.error(error);
+        res.redirect(`/${prefixAdmin}/products`);
+    }
+}
+
+// [DELETE] /admin/delete/:id
+module.exports.deleteProduct = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        await Product.updateOne({
+            _id: id
+        }, {
+            deleted: true,
+            deletedAt: new Date()
+        });
+        
+        res.redirect(`back`);
+    } catch (error) {
+        console.error(error);
+        res.redirect(`/${prefixAdmin}/products`);
+    }
+}

@@ -131,22 +131,32 @@ if(formChangeMulti)
 {
     formChangeMulti.addEventListener("submit", (e) => {
         e.preventDefault();
+
+        const type = e.target.elements.type.value;
+        if(type == "delete-all")
+        {
+            const isConfirm = confirm("Bạn có muốn xóa sản phẩm?");
+            if(!isConfirm)
+            {
+                return;
+            }
+        }
+
         const inputIds = formChangeMulti.querySelector("input[name='ids']");
         const inputsChecked = tableProduct.querySelectorAll("input[name='id']:checked");
-        const ids = [];
-        inputsChecked.forEach(item => {
-            const id = item.getAttribute("data-id");
-            ids.push(id);
-        });
-        
-        if(ids.length == 0)
+        if(inputsChecked.length > 0)
         {
-            alert("Bạn cần chọn sản phẩm!")
+            const ids = [];
+            inputsChecked.forEach(item => {
+                const id = item.getAttribute("data-id");
+                ids.push(id);
+            });
+            inputIds.value = ids.join(", ");
+            formChangeMulti.submit();
         }
         else
         {
-            inputIds.value = ids.join(", ");
-            formChangeMulti.submit();
+            alert("Bạn cần chọn sản phẩm!")
         }
     })
 }

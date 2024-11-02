@@ -31,6 +31,7 @@ block main
                         th Hình ảnh 
                         th Tiêu đề 
                         th Trạng thái 
+                        th Vị trí
                         th Giá 
                         th Hành động 
                 tbody 
@@ -68,6 +69,14 @@ block main
                                         data-id=item.id
                                         button-change-status
                                     ) Dừng hoạt động
+                            td 
+                                input(
+                                    type="number"
+                                    style="width:60px"
+                                    value=item.position
+                                    name="position"
+                                    min="1"
+                                )
                             td #{item.price} $
                             td 
                                 button(class="btn btn-warning btn-sm mr-2") Sửa 

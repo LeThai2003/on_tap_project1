@@ -1,7 +1,7 @@
-module.exports.paginationHelper = (req, totalItems) => {
+module.exports.paginationHelper = (req, totalItems, limit) => {
     const objectPagination = {
         currentPage: 1,
-        limitItems: 4
+        limitItems: limit
     }
 
     if(req.query.page)

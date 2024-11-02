@@ -31,13 +31,16 @@ module.exports.index = async (req, res) => {
         // pagination
         const countProduct = await Product.countDocuments(find);
 
-        const objectPagination = paginationHelper(req, countProduct);
+        const objectPagination = paginationHelper(req, countProduct, 4);
         // end pagination
     
     
         const products = await Product.find(find)
             .limit(objectPagination.limitItems)
-            .skip(objectPagination.skip);
+            .skip(objectPagination.skip)
+            .sort({
+                position:"desc"
+            });
     
         // console.log(products);
     
@@ -96,6 +99,17 @@ module.exports.changeMulti = async (req, res) => {
                     deleted: true,
                     deletedAt: new Date()
                 })
+                break;
+            case "change-position":
+                // console.log(ids);
+                for (const item of ids) {
+                    const [id, position] = item.split("-");
+                    await Product.updateOne({
+                        _id: id
+                    }, {
+                        position: parseInt(position)
+                    });
+                }
                 break;
             default:
                 break;

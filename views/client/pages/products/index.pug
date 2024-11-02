@@ -1,5 +1,6 @@
 extends ../../layouts/default.pug 
 include ../../mixins/box-head.pug
+include ../../mixins/pagination.pug
 
 block main 
     .container.my-3
@@ -22,5 +23,7 @@ block main
             else 
                 .col-12.text-align-center 
                     | Danh sách sản phẩm tróng!  
+        div(class="d-flex justify-content-center")
+            +pagination(pagination)
             
             

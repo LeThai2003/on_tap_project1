@@ -92,7 +92,6 @@ if(tableProduct)
 {
     const checkAll = tableProduct.querySelector("[check-all]");
     const checkItems = tableProduct.querySelectorAll("[check-item]");
-    console.log(checkAll.checked)
 
     checkAll.addEventListener("click", () => {
         if(checkAll.checked)
@@ -213,3 +212,20 @@ if(buttonsBack.length > 0)
     })
 }
 // -------end reset product---------
+
+
+// -----alert-----
+const showAlert = document.querySelector("[show-alert]");
+if(showAlert)
+{
+    const time = parseInt(showAlert.getAttribute("data-time"));
+    setTimeout(() => {
+        showAlert.classList.add("hidden-alert");
+    }, time)
+
+    const closeAlert = showAlert.querySelector("[close-alert]");
+    closeAlert.addEventListener("click", () => {
+        showAlert.classList.add("hidden-alert")
+    })
+}
+// -----end alert-----

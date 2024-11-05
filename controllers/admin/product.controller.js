@@ -70,6 +70,8 @@ module.exports.changeStatus = async (req, res) => {
             status: status
         })
 
+        req.flash('success', 'Thay đổi trạng thái sản phẩm thành công!');
+
         res.redirect(`back`);
     } catch (error) {
         console.error(error);
@@ -91,6 +93,7 @@ module.exports.changeMulti = async (req, res) => {
                 }, {
                     status: type
                 })
+                req.flash('success', 'Thay đổi trạng thái nhiều sản phẩm thành công!');
                 break;
             case "delete-all":
                 await Product.updateMany({
@@ -99,6 +102,7 @@ module.exports.changeMulti = async (req, res) => {
                     deleted: true,
                     deletedAt: new Date()
                 })
+                req.flash('success', 'Xóa nhiều sản phẩm thành công!');
                 break;
             case "change-position":
                 // console.log(ids);
@@ -110,30 +114,12 @@ module.exports.changeMulti = async (req, res) => {
                         position: parseInt(position)
                     });
                 }
+                req.flash('success', 'Thay đổi vị trí sản phẩm thành công!');
                 break;
             default:
                 break;
         }
         
-
-        res.redirect(`back`);
-    } catch (error) {
-        console.error(error);
-        res.redirect(`/${prefixAdmin}/products`);
-    }
-}
-
-// [PATCH] /admin/products/change-status/:status/:id
-module.exports.changeStatus = async (req, res) => {
-    try {
-        const status = req.params.status;
-        const id = req.params.id;
-
-        await Product.updateOne({
-            _id: id
-        }, {
-            status: status
-        })
 
         res.redirect(`back`);
     } catch (error) {

@@ -3,8 +3,12 @@ include ../../mixins/filterStatus.pug
 include ../../mixins/search.pug
 include ../../mixins/pagination.pug
 include ../../mixins/changeMulti.pug
+include ../../mixins/alert.pug
 
 block main 
+
+    +alert-success(3000)
+
     h2.mb-4 #{pageTitle}
 
     .card.mb-4

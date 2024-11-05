@@ -59,3 +59,38 @@ header .inner-logo a:hover{
     overflow-y: auto;
     flex: 1;
 }
+
+/* ----show alert----- */
+[show-alert]{
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    z-index: 999;
+}
+
+[show-alert].hidden-alert{
+    animation-name: alert-hidden;
+    animation-duration: 0.5s;
+    animation-fill-mode: both; /*biến mất luôn*/
+}
+
+@keyframes alert-hidden{
+    from{
+        right: 20px;
+    }
+    to{
+        right: -100%;
+        display: none;
+    }
+}
+[show-alert] [close-alert]{
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+/* ----end show alert----- */

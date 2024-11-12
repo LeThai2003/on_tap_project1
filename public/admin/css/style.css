@@ -94,3 +94,18 @@ header .inner-logo a:hover{
     cursor: pointer;
 }
 /* ----end show alert----- */
+
+/* -----preview image ----- */
+[preview-image]{
+    width: 150px;
+    height: auto;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+[preview-image][src=""]{
+    display: none;
+}
+/* -----end preview image ----- */

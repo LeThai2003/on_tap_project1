@@ -229,3 +229,19 @@ if(showAlert)
     })
 }
 // -----end alert-----
+
+// ------preview image--------
+const divPreviewImage = document.querySelector("[div-preview-image]");
+if(divPreviewImage)
+{
+    const inputUploadImage = divPreviewImage.querySelector("[input-upload-image]");
+    const previewImage = divPreviewImage.querySelector("[preview-image]");
+
+    inputUploadImage.addEventListener("change", (e) => {
+        const [file] = e.target.files
+        if (file) {
+            previewImage.src = URL.createObjectURL(file)
+        }
+    })
+}
+// ------end preview image----

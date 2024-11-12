@@ -139,6 +139,8 @@ module.exports.deleteProduct = async (req, res) => {
             deleted: true,
             deletedAt: new Date()
         });
+
+        req.flash("success", "Xóa sản phẩm thành công!")
         
         res.redirect(`back`);
     } catch (error) {
@@ -179,23 +181,26 @@ module.exports.createPost = async (req, res) => {
             req.body.position = countProduct + 1;
         }
 
-        if(req.body.price)
+        req.body.price = parseInt(req.body.price);
+        req.body.stock = parseInt(req.body.stock)
+
+        
+        // console.log(req.file);
+
+        if(req.file && req.file.filename)
         {
-            req.body.price = parseInt(req.body.price);
+            req.body.thumbnail = "/uploads/" + req.file.filename;
         }
-        if(req.body.stock)
-        {
-            req.body.stock = parseInt(req.body.stock)
-        }
+
+        // console.log(req.body);
 
         const product = new Product(req.body);
         await product.save();
-        
-        // console.log(req.body);
     
         req.flash("success", "Thêm mới sản phẩm thành công!");
 
         res.redirect(`/${prefixAdmin}/products`);
+        // res.redirect("back")
     } catch (error) {
         console.error(error);
         res.redirect(`/${prefixAdmin}/create`);

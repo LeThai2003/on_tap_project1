@@ -8,6 +8,7 @@ block main
         action=`/${prefixAdmin}/products/create`
         method="POST"
         form-create-product
+        enctype="multipart/form-data"
     )
         div(class="form-group")
             label(for="title") Tiêu đề
@@ -46,13 +47,19 @@ block main
                 min="0"
                 value="0"
             )
-        div(class="form-group")
+        div(class="form-group" div-preview-image)
             label(for="thumbnail") Ảnh
             input(
-                type="text"
+                type="file"
                 name="thumbnail"
-                class="form-control"
+                class="form-control-file"
                 id="thumbnail"
+                accept="image/*"
+                input-upload-image
+            )
+            img(
+                src=""
+                preview-image
             )
         div(class="form-group")
             label(for="position") Vị trí

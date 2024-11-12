@@ -12,4 +12,6 @@ route.delete("/delete/:id", controller.deleteProduct);
 
 route.get("/create", controller.create);
 
+route.post("/create", controller.createPost);
+
 module.exports = route;

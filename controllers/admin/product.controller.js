@@ -162,3 +162,42 @@ module.exports.create = async (req, res) => {
         res.redirect(`/${prefixAdmin}/create`);
     }
 }
+
+//[POST] /admin/product/create
+module.exports.createPost = async (req, res) => {
+    try {
+
+        if(req.body.position)
+        {
+            req.body.position = parseInt(req.body.position);
+        }
+        else
+        {
+            const countProduct = await Product.countDocuments({
+                deleted: false
+            });
+            req.body.position = countProduct + 1;
+        }
+
+        if(req.body.price)
+        {
+            req.body.price = parseInt(req.body.price);
+        }
+        if(req.body.stock)
+        {
+            req.body.stock = parseInt(req.body.stock)
+        }
+
+        const product = new Product(req.body);
+        await product.save();
+        
+        // console.log(req.body);
+    
+        req.flash("success", "Thêm mới sản phẩm thành công!");
+
+        res.redirect(`/${prefixAdmin}/products`);
+    } catch (error) {
+        console.error(error);
+        res.redirect(`/${prefixAdmin}/create`);
+    }
+}

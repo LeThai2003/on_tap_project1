@@ -1,0 +1,90 @@
+extends ../../layouts/default.pug 
+include ../../mixins/alert.pug
+
+block main 
+    h2.mb-4 #{pageTitle}
+
+    form(
+        action=`/${prefixAdmin}/products/create`
+        method="POST"
+        form-create-product
+    )
+        div(class="form-group")
+            label(for="title") Tiêu đề
+            input(
+                type="text"
+                class="form-control"
+                id="title"
+                name="title"
+                required
+            )
+        div(class="form-group")
+            label(for="desc") Mô tả
+            textarea(
+                name="description"
+                id="desc"
+                class="form-control"
+                rows="5"
+            )  
+        div(class="form-group")
+            lable(for="price") Giá
+            input(
+                type="number"
+                id="price"
+                class="form-control"
+                name="price"
+                value="0"
+                min="0"
+            )
+        div(class="form-group")
+            lable(for="stock") Số lượng 
+            input(
+                type="number"
+                name="stock"
+                class="form-control"
+                id="stock"
+                min="0"
+                value="0"
+            )
+        div(class="form-group")
+            label(for="thumbnail") Ảnh
+            input(
+                type="text"
+                name="thumbnail"
+                class="form-control"
+                id="thumbnail"
+            )
+        div(class="form-group")
+            label(for="position") Vị trí
+            input(
+                type="number"
+                placeholder="Tiêu đề tự động tăng"
+                class="form-control"
+                name="position"
+                id="position"
+                min="1"
+            )
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio" 
+                name="status"
+                class="form-check-input"
+                id="statusActive"
+                value="active"
+                checked
+            )
+            label(for="statusActive" class="form-check-label") Hoạt động
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio"
+                class="from-check-input"
+                name="status"
+                value="inactive"
+                id="statusInactive"
+            )
+            label(class="form-check-label" for="statusInactive") Dừng hoạt động
+        div(class="form-group")
+            button(
+                type="submit"
+                class="btn btn-primary"
+            ) Tạo mới

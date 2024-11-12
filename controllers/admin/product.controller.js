@@ -146,3 +146,19 @@ module.exports.deleteProduct = async (req, res) => {
         res.redirect(`/${prefixAdmin}/products`);
     }
 }
+
+//[GET] /admin/product/create
+module.exports.create = async (req, res) => {
+    try {
+
+        // console.log(products);
+    
+        res.render("admin/pages/product/create", {
+            pageTitle: "Thêm mới sản phẩm",
+
+        })
+    } catch (error) {
+        console.error(error);
+        res.redirect(`/${prefixAdmin}/create`);
+    }
+}

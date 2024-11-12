@@ -24,7 +24,16 @@ block main
     .card.mb-4 
         .card-header Danh sách
         .card-body 
-            +changeMulti(`/${prefixAdmin}/products/change-multi?_method=PATCH`)
+            .row
+                .col-8
+                    +changeMulti(`/${prefixAdmin}/products/change-multi?_method=PATCH`)
+                
+                .col-4.text-right
+                    a(
+                        href=`/${prefixAdmin}/products/create`
+                        class="btn btn-outline-success"
+                    ) + Thêm mới
+
               
             table.table.table-hover.table-sm(table-product)
                 thead 

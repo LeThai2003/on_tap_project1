@@ -3,7 +3,7 @@ const route = express.Router();
 const controller = require("../../controllers/admin/product.controller");
 const multerUpload = require("../../helpers/upload-multer.helper");
 
-const multer  = require('multer')
+
 
 const storage = multerUpload();
 

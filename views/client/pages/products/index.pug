@@ -17,9 +17,11 @@ block main
                             .inner-content 
                                 h3.inner-title #{item.title}
                                 .inner-new-price #{item.price}$
-                                .inner-old-price #{item.newPrice}$
-                            .inner-discount
-                                span -#{item.discountPercentage}%
+                                if item.discountPercentage
+                                    .inner-old-price #{item.newPrice}$
+                            if item.discountPercentage
+                                .inner-discount
+                                    span -#{item.discountPercentage}%
             else 
                 .col-12.text-align-center 
                     | Danh sách sản phẩm tróng!  

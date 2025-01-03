@@ -1,0 +1,38 @@
+extends ../../layouts/default.pug
+
+
+block main 
+    h2.mb-4 #{product.title} 
+
+    if(product.price)
+        div.mb-4 Giá: <b>#{product.price}$</b>
+
+    if(product.discountPercentage)
+        div.mb-4 Phần trăm giảm giá: <b>#{product.discountPercentage}%</b>
+
+    if(product.stock)
+        div.mb-4 Còn lại: <b>#{product.stock}</b>
+    
+    if(product.thumbnail)
+        div.mb-4 
+            img(
+                src=product.thumbnail
+                width="150px"    
+            )
+        
+    div.mb-4 
+        span Trạng thái: 
+        if(product.status == "active") 
+            span.badge.badge-success.ml-1 Hoạt động
+        else    
+            span.badge.badge-danger.ml Dừng hoạt động
+
+    if(product.position)
+        div.mb-4 Vị trí: <b>#{product.position}</b>
+
+    if(product.description.trim())
+        div.mb-4 #{product.description} 
+
+    
+    
+

@@ -206,3 +206,101 @@ module.exports.createPost = async (req, res) => {
         res.redirect(`/${prefixAdmin}/create`);
     }
 }
+
+
+//[GET] /admin/product/edit/:id
+module.exports.edit = async (req, res) => {
+    try {
+
+        // console.log(products);
+
+        const productId = req.params.id;
+
+        // console.log(productId);
+
+        const product = await Product.findOne({
+            _id: productId,
+            deleted: false
+        });
+
+        // console.log(product);
+    
+        res.render("admin/pages/product/edit", {
+            pageTitle: "Chỉnh sửa sản phẩm",
+            product: product
+        })
+    } catch (error) {
+        console.error(error);
+        res.redirect(`/${prefixAdmin}/products`);
+    }
+}
+
+//[PATCH] /admin/product/edit/:id
+module.exports.editPatch = async (req, res) => {
+    try {
+        const productId = req.params.id;
+
+        if(req.body.position)
+        {
+            req.body.position = parseInt(req.body.position);
+        }
+        else
+        {
+            const countProduct = await Product.countDocuments({
+                deleted: false
+            });
+            req.body.position = countProduct + 1;
+        }
+
+        req.body.price = parseInt(req.body.price);
+        req.body.stock = parseInt(req.body.stock)
+
+        
+        // // console.log(req.file);
+
+        if(req.file && req.file.filename)
+        {
+            req.body.thumbnail = "/uploads/" + req.file.filename;
+        }
+
+        // // console.log(req.body);
+
+        await Product.updateOne({
+            _id: productId,
+            deleted: false
+        }, {
+            ...req.body
+        })
+    
+        req.flash("success", "Cập nhật sản phẩm thành công!");
+
+        res.redirect(`/${prefixAdmin}/products/edit/${productId}`);
+        // res.send("ok")
+    } catch (error) {
+        console.error(error);
+        res.redirect(`/${prefixAdmin}/edit`);
+    }
+}
+
+
+// [GET] /admin/products/detail/:id
+module.exports.detail = async (req, res) => {
+    try {
+        const productId = req.params.id;
+        const product = await Product.findOne({
+            _id: productId,
+            deleted: false,
+        });
+
+        console.log(product);
+        res.render("admin/pages/product/detail", {
+            pageTitle: "Chi tiết sản phẩm",
+            product: product
+        })
+        // res.send("ok");
+        
+    } catch (error) {
+        console.log( "Chi tiết sản phẩm: " + error);
+        res.redirect(`/${prefixAdmin}/products`)
+    }
+}

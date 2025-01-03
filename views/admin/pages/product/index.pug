@@ -92,7 +92,14 @@ block main
                                 )
                             td #{item.price} $
                             td 
-                                button(class="btn btn-warning btn-sm mr-2") Sửa 
+                                a(
+                                    href=`/${prefixAdmin}/products/detail/${item.id}`
+                                    class="btn btn-secondary btn-sm mr-2"
+                                ) Chi tiết
+                                a(
+                                    href=`/${prefixAdmin}/products/edit/${item.id}`
+                                    class="btn btn-warning btn-sm mr-2"
+                                ) Sửa 
                                 button(
                                     class="btn btn-danger btn-sm"
                                     button-delete 

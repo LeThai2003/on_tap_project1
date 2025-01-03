@@ -1,0 +1,32 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+
+
+block main 
+    .container.my-3
+        .row
+            .col-12.mt-3
+                +box-head(product.title)
+
+        .row 
+            if(product.price)
+                div.col-12.mb-3 Giá: <b>#{product.price}$</b>
+            
+            if(product.discountPercentage)
+                div.col-12.mb-3 Phần trăm giảm giá: <b>#{product.discountPercentage}%</b>
+
+            if(product.stock)
+                div.col-12.mb-3 Còn lại: <b>#{product.stock}</b>
+            
+            if(product.thumbnail)
+                div.mb-3 
+                    img(
+                        src=product.thumbnail 
+                        width="100px"
+                    )
+            
+            if(product.position)
+                div.col-12.mb-3 Vị trí: <b>#{product.position}</b>
+
+            if(product.description)
+                div.col-12.mb-3 #{product.description}

@@ -37,3 +37,29 @@ module.exports.index = async (req, res) => {
         res.redirect("/products")
     }
 }
+
+// [GET] /products/detail/slug
+module.exports.detail = async (req, res) => {
+    try {
+        const slug = req.params.slug;
+
+        // console.log(slug);
+        const product = await Product.findOne({
+            slug: slug,
+            deleted: false,
+            status: "active"
+        });
+
+        console.log(product);
+
+        // res.send("ok");
+        res.render("client/pages/products/detail", {
+            pageTitle: product.title,
+            product: product
+        })
+
+    } catch (error) {
+        console.log("Chi tiết sản phẩm CLIENT " + error);
+        res.redirect("/")
+    }
+}

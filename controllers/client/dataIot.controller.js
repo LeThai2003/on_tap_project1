@@ -2,6 +2,9 @@ const DataIot = require("../../models/dataIot.model");
 
 module.exports.getData = async (req, res) => {
     try {
+
+        console.log("hi");
+
         console.log(req.params);
         console.log(req.body);
 

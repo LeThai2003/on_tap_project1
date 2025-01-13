@@ -12,6 +12,6 @@ const dataIotSchema = new mongoose.Schema({
     timestamps: true
 });
 
-const DataIot = mongoose.model("DataIot", productSchema, "data_iot");
+const DataIot = mongoose.model("DataIot", dataIotSchema, "data_iot");
 
 module.exports = DataIot;

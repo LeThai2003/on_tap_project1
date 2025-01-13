@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const flash = require('express-flash');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const cors = require('cors')
 const app = express();
 const database = require("./configs/database");
 const system = require("./configs/system");
@@ -13,6 +14,8 @@ dotenv.config();
 const port = process.env.PORT;
 //kết nối database
 database.connect();
+
+app.use(cors())
 
 // override with POST having ?_method=DELETE
 app.use(methodOverride('_method'))

@@ -2,12 +2,12 @@ const DataIot = require("../../models/dataIot.model");
 
 module.exports.getData = async (req, res) => {
     try {
-        console.log(req.params);
+        console.log(req.query);
 
-        const temperature = req.params.temperature || 10;
-        const humidity = req.params.humidity || 10;
-        const light = req.params.light || 10;
-        const soil_moisture = req.params.soil_moisture || 10;
+        const temperature = parseFloat(req.query.Temperature) || 10;
+        const humidity = parseFloat(req.query.Humidity) || 10;
+        const light = parseFloat(req.query.Light) || 10;
+        const soil_moisture = parseFloat(req.query.SoilHumidity) || 10;
 
         const data = new DataIot({
             temperature: temperature,
@@ -24,5 +24,9 @@ module.exports.getData = async (req, res) => {
             
     } catch (error) {
         console.log("Lỗi get data iot: " + error);
+        res.status(400).json({
+            code: 400,
+            message: error
+        })
     }
 }

@@ -245,3 +245,37 @@ if(divPreviewImage)
     })
 }
 // ------end preview image----
+
+// -----------sort------------
+const sort = document.querySelector("[sort]");
+if(sort)
+{
+    const sortSelect = sort.querySelector("[sort-select]");
+    const url = new URL(window.location.href);
+    sortSelect.addEventListener("change", (e) => {
+        const [sortKey, sortValue] = e.target.value.split("-");
+        url.searchParams.set("sortKey", sortKey);
+        url.searchParams.set("sortValue", sortValue);
+        window.location.href = url.href;
+    })
+
+    const sortClear = sort.querySelector("[sort-clear]");
+    sortClear.addEventListener("click", () => {
+        url.searchParams.delete("sortKey");
+        url.searchParams.delete("sortValue");
+        window.location.href = url.href;
+    })
+
+    // thêm selected cho sort
+    const sortKey = url.searchParams.get("sortKey");
+    const sortValue = url.searchParams.get("sortValue");
+
+    if(sortKey && sortValue)
+    {
+        const value = sortKey + "-" + sortValue;
+        const option = sortSelect.querySelector(`option[value="${value}"]`);
+        option.selected = true;
+        // option.setAttribute("selected", true);
+    }
+}
+// ----------end sort---------

@@ -57,7 +57,6 @@ module.exports.index = async (req, res) => {
     }
 }
 
-
 // [PATCH] /admin/products/change-status/:status/:id
 module.exports.changeStatus = async (req, res) => {
     try {
@@ -168,7 +167,6 @@ module.exports.create = async (req, res) => {
 //[POST] /admin/product/create
 module.exports.createPost = async (req, res) => {
     try {
-
         if(req.body.position)
         {
             req.body.position = parseInt(req.body.position);
@@ -186,13 +184,12 @@ module.exports.createPost = async (req, res) => {
 
         
         // console.log(req.file);
-
-        if(req.file && req.file.filename)
-        {
-            req.body.thumbnail = "/uploads/" + req.file.filename;
-        }
-
         // console.log(req.body);
+
+        // if(req.file && req.file.filename)
+        // {
+        //     req.body.thumbnail = "/uploads/" + req.file.filename;
+        // }
 
         const product = new Product(req.body);
         await product.save();

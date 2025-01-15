@@ -3,11 +3,10 @@ const streamifier = require('streamifier')
 
 // Configuration
 cloudinary.config({ 
-    cloud_name: process.env.CLOUD_NAME, 
-    api_key: process.env.CLOUD_KEY, 
-    api_secret: process.env.CLOUD_SECRET // Click 'View API Keys' above to copy your API secret
+  cloud_name: process.env.CLOUD_NAME, 
+  api_key: process.env.CLOUD_KEY, 
+  api_secret: process.env.CLOUD_SECRET// Click 'View API Keys' above to copy your API secret
 });
-
 
 module.exports.uploadSingle = function (req, res, next) {
     if(req.file)

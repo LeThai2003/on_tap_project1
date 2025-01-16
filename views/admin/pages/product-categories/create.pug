@@ -1,0 +1,90 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main
+    +alert-error(4000)
+
+    h2.mb-4 #{pageTitle}
+
+    form(
+        action=`/${prefixAdmin}/product-categories/create`
+        method="POST"
+        form-create-product-category
+        enctype="multipart/form-data"
+    )
+        div(class="form-group")
+            label(for="title") Tiêu đề
+            input(
+                type="text"
+                class="form-control"
+                id="title"
+                name="title"
+                required
+            )
+        div(class="form-group")
+            label(for="parentId") Danh mục cha
+            input(
+                type="text"
+                class="form-control"
+                id="parentId"
+                name="parentId"
+            )
+        div(class="form-group")
+            label(for="description") Mô tả
+            textarea(
+                name="description"
+                id="description"
+                textarea-mce
+                class="form-control"
+                row="5"
+            )
+        div(class="form-group" upload-image)
+            label(for="thumbnail") Ảnh 
+            input(
+                type="file"
+                id="thumbnail"
+                name="thumbnail"
+                class="form-control-file"
+                accept="image/*"
+                upload-image-file
+            )
+            img(src="" upload-image-preview)
+        div(class="form-group")
+            label(for="position") Vị trí
+            input(
+                type="number"
+                placeholder="Vị trí tự động tăng"
+                class="form-control"
+                name="position"
+                id="position"
+                min="1"
+                style="text-align: center;"
+            )
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio"
+                name="status"
+                class="form-check-input"
+                id="statusActive"
+                value="active"
+                checked
+            )
+            label(for="statusActive" class="form-check-label") Hoạt động 
+
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio" 
+                name="status"
+                class="form-check-input"
+                value="inactive"
+                id="statusInactive"
+            )
+            label(for="statusInactive" class="form-check-label") Dừng hoạt động
+        
+        div(class="form-group")
+            button(
+                type="submit"
+                class="btn btn-primary"
+            ) Tạo mới
+
+    script(src="/admin/js/product-categories.js") 

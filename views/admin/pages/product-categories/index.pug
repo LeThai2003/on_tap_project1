@@ -1,0 +1,84 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main
+    +alert-success(4000)
+
+    h2.mb-4 #{pageTitle}
+
+    .card.mb-4
+        .card-header Danh sách 
+        .card-body
+            .row
+                .col-8
+                
+                .col-4.text-right.mb-3
+                    a(
+                        href=`/${prefixAdmin}/product-categories/create`
+                        class="btn btn-outline-success"
+                    ) + Thêm mới
+            if productCategories.length > 0
+                table.table.table-hover.table-sm(table-categories)
+                    thead 
+                        tr 
+                            th 
+                                input(type="checkbox" check-all)
+                            th STT 
+                            th Hình ảnh
+                            th Tiêu đề
+                            th Trạng thái 
+                            th Vị trí
+                            th Hành động
+                    tbody
+                        each item, index in productCategories
+                            tr
+                                td 
+                                    input(type="checkbox" name="id" check-item data-id=item.id)
+                                td #{index + 1}
+                                td 
+                                    img(src=item.thumbnail alt=item.title width="100px")
+                                td #{item.title}
+                                td 
+                                    if(item.status == "active")
+                                        a(
+                                            href="javascript:;"
+                                            data-id=item.id
+                                            class="badge badge-success button-change-status"
+                                        ) Hoạt động
+                                    else 
+                                        a(
+                                            href="javascript:;"
+                                            data-id=item.id
+                                            class="badge badge-danger button-change-status"
+                                        ) Ngừng hoạt động
+                                td 
+                                    input(
+                                        type="number"
+                                        style="width:60px"
+                                        value=item.position
+                                        name="position"
+                                        min="1"
+                                    )
+                                td
+                                    a(
+                                        class="btn btn-sm btn-secondary mr-2"
+                                        href=`/${prefixAdmin}/product-categories/detail/${item.id}`
+                                    ) Chi tiết
+                                    a(
+                                        href=`/${prefixAdmin}/product-categories/edit/${item.id}`
+                                        class="btn btn-sm btn-warning mr-2"
+                                    ) Sửa
+                                    a(
+                                        button-delete-product-categories
+                                        data-id=item.id
+                                        class="btn btn-sm btn-danger"
+                                    ) Xóa
+
+
+            else 
+                div(class="text-center alert alert-warning") Danh mục sản phẩm tróng!
+
+    
+                                                          
+            
+    script(src="/admin/js/product-categories.js")

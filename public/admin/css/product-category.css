@@ -1,0 +1,13 @@
+img[src=""]{
+    display: none;
+}
+
+[upload-image-preview]{
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 10px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    margin: 5px 0px;
+}

@@ -29,7 +29,8 @@ block main
                 id="desc"
                 class="form-control"
                 rows="5"
-            ) #{product.description}
+                textarea-mce
+            ) !{product.description}
         div(class="form-group")
             lable(for="price") Giá
             input(

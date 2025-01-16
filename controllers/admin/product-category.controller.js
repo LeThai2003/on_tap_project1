@@ -24,9 +24,34 @@ module.exports.index = async (req, res) => {
 // [GET] /admin/product-categories/create
 module.exports.create = async (req, res) => {
     try {
+
+        const productCategories = await ProductCategory.find({deleted: false});
+
+        const createTree = (arr, parentId = "") => {
+            const tree = [];
+            arr.forEach(item => {
+                if(item.parentId === parentId)
+                {
+                    const newItem = item;
+                    // đi sâu vào con xem thử nó có con không
+                    const children = createTree(arr, item.id);
+                    if(children.length > 0)
+                    {
+                        newItem.children = children;
+                    }
+                    tree.push(newItem);     // tree(cha) push newItem(con)
+                }
+            });
+            return tree;
+        }
+
+        const newProductCategories = createTree(productCategories);
+
+        console.log(newProductCategories);
         
         res.render("admin/pages/product-categories/create", {
             pageTitle: "Thêm mới danh mục",
+            productCategories: newProductCategories
         })
     } catch (error) {
         console.log("Error in product-categories create get: " + error);

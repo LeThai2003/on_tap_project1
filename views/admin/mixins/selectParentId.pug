@@ -1,0 +1,6 @@
+mixin selectParentId(arr, level = 1)
+    each item in arr
+        - let prefix = Array(level+1).join("-- ")
+        option(value=item.id) #{prefix}#{item.title}
+        if(item.children)
+            +selectParentId(item.children, level + 1)
